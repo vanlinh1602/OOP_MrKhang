@@ -1,6 +1,11 @@
-Nguyễn Văn Linh - 20520613
+Group 2 OOP
 
-Hồng Gia Hy - 20520561
+    Nguyễn Văn Linh - 20520613
 
-Đỗ Trọng Tình
+    Hồng Gia Hy - 20520561
+
+    Đỗ Trọng Tình - 20520318
+
+    Nguyễn Huy Trí Dũng - 20520459
+
 
