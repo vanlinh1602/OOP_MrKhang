@@ -8,4 +8,5 @@ Group 2 OOP
 
     Nguyễn Huy Trí Dũng - 20520459
 
+    Nguyễn Công Đoàn - 20520447
 
