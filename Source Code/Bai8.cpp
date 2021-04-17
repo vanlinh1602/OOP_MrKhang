@@ -28,9 +28,11 @@ public:
     void setMu_x(float);
     CDonThuc &operator=(CDonThuc &);
     // Phương thức kiểm tra
+    int isBangKhong();
+    int isKhacKhong();
+    // Phương thức xử lí
     int operator==(CDonThuc &);
     int operator!=(CDonThuc &);
-    // Phương thức xử lí
     CDonThuc &operator*(CDonThuc &);
     CDonThuc &operator*=(CDonThuc &);
     CDonThuc &operator/(CDonThuc &);
@@ -143,6 +145,20 @@ CDonThuc &CDonThuc::operator=(CDonThuc &a)
 // --------------------------
 // Phương thức kiểm tra
 // --------------------------
+// Kiểm tra bằng không
+int CDonThuc::isBangKhong()
+{
+    return (hs == 0);
+}
+//Kiểm tra khác không
+int CDonThuc::isKhacKhong()
+{
+    return (hs != 0);
+}
+// --------------------------
+// Phương thức xử lí
+// --------------------------
+
 // Phương thức so sánh bằng
 int CDonThuc::operator==(CDonThuc &a)
 {
@@ -153,10 +169,6 @@ int CDonThuc::operator!=(CDonThuc &a)
 {
     return (hs != a.hs || mu_x != a.mu_x);
 }
-
-// --------------------------
-// Phương thức xử lí
-// --------------------------
 // Nhân 2 đa thức
 CDonThuc &CDonThuc::operator*(CDonThuc &a)
 {
@@ -169,21 +181,20 @@ CDonThuc &CDonThuc::operator/(CDonThuc &a)
     CDonThuc temp = *this;
     return *this /= a;
 }
-
+// Toán tử *=
 CDonThuc &CDonThuc::operator*=(CDonThuc &a)
 {
     hs *= a.hs;
     mu_x += a.mu_x;
     return *this;
 }
-
+// Toán tử /=
 CDonThuc &CDonThuc::operator/=(CDonThuc &a)
 {
     hs /= a.hs;
     mu_x -= a.mu_x;
     return *this;
 }
-
 // Tính đạo hàm
 void CDonThuc::DaoHam()
 {
@@ -212,9 +223,5 @@ CDonThuc::~CDonThuc()
 
 int main()
 {
-    CDonThuc a(2, 2);
-    CDonThuc b;
-    a.DaoHam();
-    cout << a;
     return 0;
 }
