@@ -32,12 +32,12 @@ public:
     // Nhóm phương thức kiểm tra
     int isHonSo();
     // Nhóm phương thức xử lý
-    int operator == (CHonSo&);
-    int operator != (CHonSo&);
-    int operator > (CHonSo&);
-    int operator >= (CHonSo&);
-    int operator < (CHonSo&);
-    int operator <= (CHonSo&);
+    int operator == (const CHonSo&);
+    int operator != (const CHonSo&);
+    int operator > (const CHonSo&);
+    int operator >= (const CHonSo&);
+    int operator < (const CHonSo&);
+    int operator <= (const CHonSo&);
     CHonSo operator+(CHonSo);
     CHonSo operator-(CHonSo);
     CHonSo operator*(CHonSo);
@@ -160,7 +160,7 @@ int CHonSo::isHonSo()
     return 0;
 }
 //Nhóm phương thức xử lý
-int CHonSo::operator==(CHonSo& P)
+int CHonSo::operator==(CHonSo P)
 {
     float a = (float)(((nguyen * mau) + tu) / mau);
     float b = (float)(((P.nguyen * P.mau) + P.tu) / P.mau);
@@ -168,7 +168,7 @@ int CHonSo::operator==(CHonSo& P)
         return 1;
     return 0;
 }
-int CHonSo::operator!=(CHonSo& P)
+int CHonSo::operator!=(CHonSo P)
 {
     float a = (float)(((nguyen * mau) + tu) / mau);
     float b = (float)(((P.nguyen * P.mau) + P.tu) / P.mau);
@@ -176,7 +176,7 @@ int CHonSo::operator!=(CHonSo& P)
         return 1;
     return 0;
 }
-int CHonSo::operator>(CHonSo& P)
+int CHonSo::operator>(CHonSo P)
 {
     float a = (float)(((nguyen * mau) + tu) / mau);
     float b = (float)(((P.nguyen * P.mau) + P.tu) / P.mau);
@@ -184,7 +184,7 @@ int CHonSo::operator>(CHonSo& P)
         return 1;
     return 0;
 }
-int CHonSo::operator>=(CHonSo& P)
+int CHonSo::operator>=(CHonSo P)
 {
     float a = (float)(((nguyen * mau) + tu) / mau);
     float b = (float)(((P.nguyen * P.mau) + P.tu) / P.mau);
@@ -192,7 +192,7 @@ int CHonSo::operator>=(CHonSo& P)
         return 1;
     return 0;
 }
-int CHonSo::operator<(CHonSo& P)
+int CHonSo::operator<(CHonSo P)
 {
     float a = (float)(((nguyen * mau) + tu) / mau);
     float b = (float)(((P.nguyen * P.mau) + P.tu) / P.mau);
@@ -200,7 +200,7 @@ int CHonSo::operator<(CHonSo& P)
         return 1;
     return 0;
 }
-int CHonSo::operator<=(CHonSo& P)
+int CHonSo::operator<=(CHonSo P)
 {
     float a = (float)(((nguyen * mau) + tu) / mau);
     float b = (float)(((P.nguyen * P.mau) + P.tu) / P.mau);
