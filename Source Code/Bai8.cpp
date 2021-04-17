@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 using namespace std;
 
 class CDonThuc
@@ -31,10 +32,12 @@ public:
     int operator!=(CDonThuc &);
     // Phương thức xử lí
     CDonThuc &operator*(CDonThuc &);
+    CDonThuc &operator*=(CDonThuc &);
     CDonThuc &operator/(CDonThuc &);
+    CDonThuc &operator/=(CDonThuc &);
     CDonThuc &DaoHam();
     CDonThuc &NguyenHam();
-    CDonThuc &GiaTriTaiX(float);
+    float GiaTriTaiX(float);
     ~CDonThuc();
 };
 // --------------------------
@@ -133,19 +136,90 @@ void CDonThuc::setMu_x(float mu_x)
 // Toán tử =
 CDonThuc &CDonThuc::operator=(CDonThuc &a)
 {
-    CDonThuc temp;
-    temp.hs = hs;
-    temp.mu_x = mu_x;
-    return temp;
+    hs = a.hs;
+    mu_x = a.mu_x;
+    return *this;
 }
 // --------------------------
 // Phương thức kiểm tra
 // --------------------------
 // Phương thức so sánh bằng
-int CDonThuc::operator==(CDonThuc &a){
+int CDonThuc::operator==(CDonThuc &a)
+{
     return (hs == a.hs && mu_x == a.mu_x);
 }
 // Phương thức so sánh khác
-int CDonThuc::operator!=(CDonThuc &a){
+int CDonThuc::operator!=(CDonThuc &a)
+{
     return (hs != a.hs || mu_x != a.mu_x);
+}
+
+// --------------------------
+// Phương thức xử lí
+// --------------------------
+// Nhân 2 đa thức
+CDonThuc &CDonThuc::operator*(CDonThuc &a)
+{   
+    CDonThuc temp = *this;
+    return temp *= a;
+}
+// Chia 2 đa thức
+CDonThuc &CDonThuc::operator/(CDonThuc &a)
+{
+    CDonThuc temp = *this;
+    return *this /= a;
+}
+
+CDonThuc &CDonThuc::operator*=(CDonThuc &a)
+{
+    hs *= a.hs;
+    mu_x += a.mu_x;
+    return *this;
+}
+
+CDonThuc &CDonThuc::operator/=(CDonThuc &a)
+{
+    hs /= a.hs;
+    mu_x -= a.mu_x;
+    return *this;
+}
+
+
+// Tính đạo hàm
+CDonThuc &CDonThuc::DaoHam()
+{
+    CDonThuc temp = *this;
+    temp.hs = hs * mu_x;
+    temp.mu_x = mu_x - 1;
+    return temp;
+}
+// Tính nguyên hàm
+CDonThuc &CDonThuc::NguyenHam()
+{
+    CDonThuc temp;
+    mu_x = mu_x + 1;
+    temp.hs = hs / mu_x;
+    return temp;
+}
+// Tính giá trị tại x
+float CDonThuc::GiaTriTaiX(float x)
+{
+    float temp;
+    temp = pow(x, mu_x);
+    temp = temp * hs;
+    return temp;
+}
+// Phương thức phá huỷ
+CDonThuc::~CDonThuc()
+{
+    return;
+}
+
+int main()
+{
+    CDonThuc a(2, 2);
+    CDonThuc b;
+    b = a.DaoHam();
+    cout << b << a;
+    return 0;
 }
