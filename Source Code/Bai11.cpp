@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 using namespace std;
 
 class CDiem
@@ -8,26 +9,20 @@ private:
     float y;
 
 public:
+    CDiem()
+    {
+        x = 0;
+        y = 0;
+    }
+    CDiem(float x, float y)
+    {
+        this->x = x;
+        this->y = y;
+    }
     void KhoiTao(float x, float y)
     {
         this->x = x;
         this->y = y;
-    }
-    void setX(float x)
-    {
-        this->x = x;
-    }
-    void setY(float y)
-    {
-        this->y = y;
-    }
-    float getX()
-    {
-        return x;
-    }
-    float gety()
-    {
-        return y;
     }
     CDiem &operator=(CDiem &a)
     {
@@ -38,6 +33,19 @@ public:
     float KhoangCach(CDiem a)
     {
         return sqrt((x - a.x) * (x - a.x) + (y - a.y) * (y - a.y));
+    }
+    friend istream &operator>>(istream &is, CDiem &a)
+    {
+        cout << "Nhap x: ";
+        is >> a.x;
+        cout << "Nhap y: ";
+        is >> a.y;
+        return is;
+    }
+    friend ostream &operator<<(ostream &os, CDiem &a)
+    {
+        os << "( " << a.x << ", " << a.y << " )";
+        return os;
     }
 };
 
@@ -66,9 +74,9 @@ public:
     void xuat();
     // Phương thức cập nhập thông tin
     CTamGiac &operator=(CTamGiac &);
-    void SetA(CDiem);
-    void SetB(CDiem);
-    void SetC(CDiem);
+    void SetA(CDiem &);
+    void SetB(CDiem &);
+    void SetC(CDiem &);
     // Phương thức kiểm tra thông tin
     int isCan();
     int isDeu();
@@ -76,58 +84,195 @@ public:
     // Phương thức xử lí
     int operator==(CTamGiac);
     int operator!=(CTamGiac);
-    int operator>(CTamGiac);
-    int operator>=(CTamGiac);
-    int operator<(CTamGiac);
-    int operator<=(CTamGiac);
     float ChuVi();
     float DienTich();
 };
-
+// Phương thức khởi tạo
+// Thiết lập mặc định
 CTamGiac::CTamGiac()
 {
     a.KhoiTao(0, 0);
     b.KhoiTao(0, 1);
     c.KhoiTao(1, 0);
 }
-
+// Thiết lập khi biết đầy đủ thông tin
 CTamGiac::CTamGiac(CDiem a, CDiem b, CDiem c)
 {
     this->a = a;
     this->b = b;
     this->c = c;
 }
-
+// Thiết lập sao chép
 CTamGiac::CTamGiac(CTamGiac &x)
 {
     a = x.a;
     b = x.b;
     c = x.c;
 }
-
+// Phương thức khởi tạo mặc định
 void CTamGiac::KhoiTao()
 {
     a.KhoiTao(0, 0);
     b.KhoiTao(0, 1);
     c.KhoiTao(1, 0);
 }
-
+// Phương thức khởi tạo khi biết đầy đủ thông tin
 void CTamGiac::KhoiTao(CDiem a, CDiem b, CDiem c)
 {
     this->a = a;
     this->b = b;
     this->c = c;
 }
-
+// Phương thức khởi tạo sao chép
 void CTamGiac::KhoiTao(CTamGiac &x)
 {
     a = x.a;
     b = x.b;
     c = x.c;
 }
-
-istream &operator>>(istream &is, CTamGiac &x){
+// Toán tử nhập
+istream &operator>>(istream &is, CTamGiac &x)
+{
     cout << "Nhap tam giac: \n";
     cout << "Diem A: ";
+    is >> x.a;
+    cout << "Diem B: ";
+    is >> x.b;
+    cout << "Diem C: ";
+    is >> x.c;
+    return is;
 }
-void nhap();
+// Phương thức nhập
+void CTamGiac::nhap()
+{
+    cout << "Nhap tam giac: \n";
+    cout << "Diem A: ";
+    cin >> a;
+    cout << "Diem B: ";
+    cin >> b;
+    cout << "Diem C: ";
+    cin >> c;
+}
+// Phương thức cung cấp  thông tin
+// Lấy toạ độ điểm A
+CDiem CTamGiac::getA()
+{
+    return a;
+}
+// Lấy toạ độ điểm B
+CDiem CTamGiac::getB()
+{
+    return b;
+}
+//Lấy toạ độ điểm C
+CDiem CTamGiac::getC()
+{
+    return c;
+}
+// Toán tử xuất
+ostream &operator<<(ostream &os, CTamGiac &X)
+{
+    os << "Tam giac co: \n";
+    os << "Dinh A: " << X.a << endl;
+    os << "Dinh B: " << X.b << endl;
+    os << "Dinh C: " << X.c << endl;
+    return os;
+}
+// Phương thức cập nhập thông tin
+// Toán tử gán
+CTamGiac &CTamGiac::operator=(CTamGiac &X)
+{
+    a = X.a;
+    b = X.b;
+    c = X.c;
+    return *this;
+}
+// Cập nhập điểm A
+void CTamGiac::SetA(CDiem &x)
+{
+    this->a = x;
+}
+// Cập nhập điểm B
+void CTamGiac::SetB(CDiem &x)
+{
+    this->b = x;
+}
+// Cập nhập diểm C
+void CTamGiac::SetC(CDiem &x)
+{
+    this->c = x;
+}
+// Phương thức kiểm tra
+// Kiểm tra Tam giac can
+int CTamGiac::isCan()
+{
+    float temp, temp1, temp2;
+    temp = a.KhoangCach(b);
+    temp1 = a.KhoangCach(c);
+    temp2 = b.KhoangCach(c);
+    return (temp == temp1 || temp == temp2 || temp1 == temp2);
+}
+// Kiểm tra Tam giac deu
+int CTamGiac::isDeu()
+{
+    float temp, temp1, temp2;
+    temp = a.KhoangCach(b);
+    temp1 = a.KhoangCach(c);
+    temp2 = b.KhoangCach(c);
+    return (temp == temp1 && temp == temp2);
+}
+// Kiểm tra tam giác vuông
+int CTamGiac::isVuong()
+{
+    float temp, temp1, temp2;
+    temp = a.KhoangCach(b);
+    temp1 = a.KhoangCach(c);
+    temp2 = c.KhoangCach(b);
+    float s1,s2,s3;
+    s1 = sqrt(temp * temp + temp1 * temp1);
+    s2 = sqrt(temp1 * temp1 + temp2*temp2);
+    s3 = sqrt(temp2*temp2 + temp * temp);
+    if ((s1 == temp2 || s2 == temp || s3 == temp1))
+        return 1;
+    else
+        return 0;
+}
+// Phương thức xử lí
+// So sánh bằng
+int CTamGiac::operator==(CTamGiac X)
+{
+    float temp = this->ChuVi();
+    float temp1 = X.ChuVi();
+    return (temp == temp1);
+}
+// So sánh khác
+int CTamGiac::operator!=(CTamGiac X)
+{
+    float temp = this->ChuVi();
+    float temp1 = X.ChuVi();
+    return (temp != temp1);
+}
+// Tính chu vi
+float CTamGiac::ChuVi()
+{
+    float temp, temp1, temp2;
+    temp = a.KhoangCach(b);
+    temp1 = a.KhoangCach(c);
+    temp2 = b.KhoangCach(c);
+    return (temp + temp1 + temp2);
+}
+// Tính diện tích
+float CTamGiac::DienTich()
+{
+    float temp, temp1, temp2;
+    temp = a.KhoangCach(b);
+    temp1 = a.KhoangCach(c);
+    temp2 = b.KhoangCach(c);
+    float p = (temp + temp1 + temp2) / 2;
+    return sqrt(p * (p - temp) * (p - temp1) * (p - temp2));
+}
+
+int main()
+{
+    return 0;
+}
