@@ -35,8 +35,8 @@ public:
     CDonThuc &operator*=(CDonThuc &);
     CDonThuc &operator/(CDonThuc &);
     CDonThuc &operator/=(CDonThuc &);
-    CDonThuc &DaoHam();
-    CDonThuc &NguyenHam();
+    void DaoHam();
+    void NguyenHam();
     float GiaTriTaiX(float);
     ~CDonThuc();
 };
@@ -159,7 +159,7 @@ int CDonThuc::operator!=(CDonThuc &a)
 // --------------------------
 // Nhân 2 đa thức
 CDonThuc &CDonThuc::operator*(CDonThuc &a)
-{   
+{
     CDonThuc temp = *this;
     return temp *= a;
 }
@@ -184,22 +184,17 @@ CDonThuc &CDonThuc::operator/=(CDonThuc &a)
     return *this;
 }
 
-
 // Tính đạo hàm
-CDonThuc &CDonThuc::DaoHam()
+void CDonThuc::DaoHam()
 {
-    CDonThuc temp = *this;
-    temp.hs = hs * mu_x;
-    temp.mu_x = mu_x - 1;
-    return temp;
+    hs = hs * mu_x;
+    mu_x = mu_x - 1;
 }
 // Tính nguyên hàm
-CDonThuc &CDonThuc::NguyenHam()
+void CDonThuc::NguyenHam()
 {
-    CDonThuc temp;
     mu_x = mu_x + 1;
-    temp.hs = hs / mu_x;
-    return temp;
+    hs = hs / mu_x;
 }
 // Tính giá trị tại x
 float CDonThuc::GiaTriTaiX(float x)
@@ -219,7 +214,7 @@ int main()
 {
     CDonThuc a(2, 2);
     CDonThuc b;
-    b = a.DaoHam();
-    cout << b << a;
+    a.DaoHam();
+    cout << a;
     return 0;
 }
