@@ -25,14 +25,10 @@ public:
     // Phương thức cập nhập thông tin
     void setHs(float);
     void setMu_x(float);
-    CDonThuc& operator=(CDonThuc &);
+    CDonThuc &operator=(CDonThuc &);
     // Phương thức kiểm tra
     int operator==(CDonThuc &);
     int operator!=(CDonThuc &);
-    int operator>(CDonThuc &);
-    int operator>=(CDonThuc &);
-    int operator<(CDonThuc &);
-    int operator<=(CDonThuc &);
     // Phương thức xử lí
     CDonThuc &operator*(CDonThuc &);
     CDonThuc &operator/(CDonThuc &);
@@ -101,22 +97,55 @@ void CDonThuc::Nhap()
 // Phương thức cung cấp thông tin
 // --------------------------
 // Phương thức cung cấp hệ số.
-float CDonThuc::getHs(){
+float CDonThuc::getHs()
+{
     return hs;
 }
 // Phương thức cung cấp mũ x
-float CDonThuc::getMu_x(){
+float CDonThuc::getMu_x()
+{
     return mu_x;
 }
 // Toán tử xuất
-ostream &operator<<(ostream & os, CDonThuc &a){
+ostream &operator<<(ostream &os, CDonThuc &a)
+{
     os << a.hs << "x^" << a.mu_x;
     return os;
 }
 // Phương thức xuất
-void CDonThuc::Xuat(){
+void CDonThuc::Xuat()
+{
     cout << hs << "x^" << mu_x;
 }
 // --------------------------
 // Phương thức cập nhập thông tin
 // --------------------------
+// Phương thức cập nhập hệ số
+void CDonThuc::setHs(float hs)
+{
+    this->hs = hs;
+}
+// Phương thức cập nhập mũ x
+void CDonThuc::setMu_x(float mu_x)
+{
+    this->mu_x = mu_x;
+}
+// Toán tử =
+CDonThuc &CDonThuc::operator=(CDonThuc &a)
+{
+    CDonThuc temp;
+    temp.hs = hs;
+    temp.mu_x = mu_x;
+    return temp;
+}
+// --------------------------
+// Phương thức kiểm tra
+// --------------------------
+// Phương thức so sánh bằng
+int CDonThuc::operator==(CDonThuc &a){
+    return (hs == a.hs && mu_x == a.mu_x);
+}
+// Phương thức so sánh khác
+int CDonThuc::operator!=(CDonThuc &a){
+    return (hs != a.hs || mu_x != a.mu_x);
+}
