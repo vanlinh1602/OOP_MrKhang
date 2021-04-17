@@ -25,8 +25,10 @@ public:
     // Phương thức cập nhập thông tin
     void setHs(float);
     void setMu_x(float);
+    CDonThuc& operator=(CDonThuc &);
     // Phương thức kiểm tra
-    int operator=(CDonThuc &);
+    int operator==(CDonThuc &);
+    int operator!=(CDonThuc &);
     int operator>(CDonThuc &);
     int operator>=(CDonThuc &);
     int operator<(CDonThuc &);
@@ -38,7 +40,10 @@ public:
     CDonThuc &NguyenHam();
     CDonThuc &GiaTriTaiX(float);
     ~CDonThuc();
-}
+};
+// --------------------------
+// Phương thức khởi tạo
+// --------------------------
 // Phương thức thiết lập mặc định
 CDonThuc::CDonThuc()
 {
@@ -92,3 +97,26 @@ void CDonThuc::Nhap()
     cout << "Nhap mu cua x";
     cin >> mu_x;
 }
+// --------------------------
+// Phương thức cung cấp thông tin
+// --------------------------
+// Phương thức cung cấp hệ số.
+float CDonThuc::getHs(){
+    return hs;
+}
+// Phương thức cung cấp mũ x
+float CDonThuc::getMu_x(){
+    return mu_x;
+}
+// Toán tử xuất
+ostream &operator<<(ostream & os, CDonThuc &a){
+    os << a.hs << "x^" << a.mu_x;
+    return os;
+}
+// Phương thức xuất
+void CDonThuc::Xuat(){
+    cout << hs << "x^" << mu_x;
+}
+// --------------------------
+// Phương thức cập nhập thông tin
+// --------------------------
