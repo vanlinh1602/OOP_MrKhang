@@ -26,17 +26,17 @@ public:
     // Phương thức cập nhập thông tin
     void setHs(float);
     void setMu_x(float);
-    CDonThuc &operator=(CDonThuc &);
+    CDonThuc &operator=(const CDonThuc &);
     // Phương thức kiểm tra
     int isBangKhong();
     int isKhacKhong();
     // Phương thức xử lí
     int operator==(CDonThuc &);
     int operator!=(CDonThuc &);
-    CDonThuc &operator*(CDonThuc &);
-    CDonThuc &operator*=(CDonThuc &);
-    CDonThuc &operator/(CDonThuc &);
-    CDonThuc &operator/=(CDonThuc &);
+    CDonThuc operator*(CDonThuc &);
+    CDonThuc operator*=(CDonThuc &);
+    CDonThuc operator/(CDonThuc &);
+    CDonThuc operator/=(CDonThuc &);
     void DaoHam();
     void NguyenHam();
     float GiaTriTaiX(float);
@@ -136,7 +136,7 @@ void CDonThuc::setMu_x(float mu_x)
     this->mu_x = mu_x;
 }
 // Toán tử =
-CDonThuc &CDonThuc::operator=(CDonThuc &a)
+CDonThuc &CDonThuc::operator=(const CDonThuc &a)
 {
     hs = a.hs;
     mu_x = a.mu_x;
@@ -170,26 +170,30 @@ int CDonThuc::operator!=(CDonThuc &a)
     return (hs != a.hs || mu_x != a.mu_x);
 }
 // Nhân 2 đa thức
-CDonThuc &CDonThuc::operator*(CDonThuc &a)
+CDonThuc CDonThuc::operator*(CDonThuc &a)
 {
-    CDonThuc temp = *this;
-    return temp *= a;
+        CDonThuc temp;
+        temp.hs = hs * a.hs;
+        temp.mu_x = mu_x + a.mu_x;
+        return temp;
 }
 // Chia 2 đa thức
-CDonThuc &CDonThuc::operator/(CDonThuc &a)
+CDonThuc CDonThuc::operator/(CDonThuc &a)
 {
-    CDonThuc temp = *this;
-    return *this /= a;
+     CDonThuc temp;
+        temp.hs = hs / a.hs;
+        temp.mu_x = mu_x - a.mu_x;
+        return temp;
 }
 // Toán tử *=
-CDonThuc &CDonThuc::operator*=(CDonThuc &a)
+CDonThuc CDonThuc::operator*=(CDonThuc &a)
 {
     hs *= a.hs;
     mu_x += a.mu_x;
     return *this;
 }
 // Toán tử /=
-CDonThuc &CDonThuc::operator/=(CDonThuc &a)
+CDonThuc CDonThuc::operator/=(CDonThuc &a)
 {
     hs /= a.hs;
     mu_x -= a.mu_x;

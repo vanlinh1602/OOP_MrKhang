@@ -24,7 +24,7 @@ public:
         this->x = x;
         this->y = y;
     }
-    CDiem &operator=(CDiem &a)
+    CDiem &operator=(const CDiem &a)
     {
         this->x = a.x;
         this->y = a.y;
@@ -73,7 +73,7 @@ public:
     friend ostream &operator<<(ostream &, CTamGiac &);
     void xuat();
     // Phương thức cập nhập thông tin
-    CTamGiac &operator=(CTamGiac &);
+    CTamGiac &operator=(const CTamGiac &);
     void SetA(CDiem &);
     void SetB(CDiem &);
     void SetC(CDiem &);
@@ -180,7 +180,7 @@ ostream &operator<<(ostream &os, CTamGiac &X)
 }
 // Phương thức cập nhập thông tin
 // Toán tử gán
-CTamGiac &CTamGiac::operator=(CTamGiac &X)
+CTamGiac &CTamGiac::operator=(const CTamGiac &X)
 {
     a = X.a;
     b = X.b;
