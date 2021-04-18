@@ -86,6 +86,7 @@ public:
     int operator!=(CTamGiac);
     float ChuVi();
     float DienTich();
+    ~CTamGiac();
 };
 // Phương thức khởi tạo
 // Thiết lập mặc định
@@ -270,6 +271,10 @@ float CTamGiac::DienTich()
     temp2 = b.KhoangCach(c);
     float p = (temp + temp1 + temp2) / 2;
     return sqrt(p * (p - temp) * (p - temp1) * (p - temp2));
+}
+// Phương thức phá huỷ
+CTamGiac::~CTamGiac(){
+    return;
 }
 
 int main()
