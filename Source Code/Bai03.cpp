@@ -8,7 +8,7 @@ private:
     float mau;
 
 public:
-    // Phương thức thiết lập
+    // Phương thức khởi tạo
     CPhanSo();
     CPhanSo(float, float);
     CPhanSo(const CPhanSo &);
@@ -92,6 +92,13 @@ istream &operator>>(istream &is, CPhanSo &a)
     cout << "Nhap mau: ";
     is >> a.mau;
     return is;
+}
+
+void CPhanSo::Nhap(){
+    cout << "Nhap tu: ";
+    cin >> tu;
+    cout << "Nhap mau: ";
+    cin >> mau;
 }
 // Phương thức cung cấp thông tin
 float CPhanSo::getTu()
@@ -255,6 +262,5 @@ CPhanSo::~CPhanSo(){
 }
 
 int main(){
-    
     return 0;
 }
