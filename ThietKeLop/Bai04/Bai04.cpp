@@ -11,8 +11,8 @@ private:
 public:
     // Nhóm phương thức khởi tạo
     void KhoiTao();
-    void KhoiTao(int, int, int);
     void KhoiTao(const CHonSo&);
+    void KhoiTao(int, int, int);
     CHonSo();
     CHonSo(const CHonSo&);
     CHonSo(int, int, int);
@@ -243,5 +243,3 @@ CHonSo::~CHonSo()
 {
     return;
 }
-
-
