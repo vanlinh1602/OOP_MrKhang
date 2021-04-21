@@ -13,8 +13,8 @@ public:
     void KhoiTao(const CSoPhuc&);
     void KhoiTao(float, float);
     CSoPhuc();
-    CSoPhuc(float, float);
     CSoPhuc(const CSoPhuc&);
+    CSoPhuc(float, float);
     void Nhap();
     friend istream& operator >> (istream&, CSoPhuc&);
     // Nhóm phương thức cung cấp thông tin
